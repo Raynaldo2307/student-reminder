@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:students_reminder/src/features/attendance/attendance_screen.dart';
 import 'package:students_reminder/src/features/auth/login_page.dart';
 import 'package:students_reminder/src/features/home/home_page.dart';
 import 'package:students_reminder/src/features/notes/my_notes_page.dart';
@@ -14,35 +15,47 @@ class MainLayoutPage extends StatefulWidget {
 }
 
 class _MainLayoutPageState extends State<MainLayoutPage> {
-  int _index = 0;
+  int _index = 2;
 
-  final _pages = const [HomePage(), MyNotesPage(), ProfilePage()];
+  final _pages = const [
+    HomePage(),
+    MyNotesPage(),
+    AttendanceScreen(),
+    ProfilePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      stream: AuthService.instance.authStateChanged(), 
-      builder: (context, snap){
+      stream: AuthService.instance.authStateChanged(),
+      builder: (context, snap) {
         if (snap.connectionState == ConnectionState.waiting) {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
         }
-          final user = snap.data;
-          if (user == null) return LoginPage();
-          return Scaffold(
-            body: _pages[_index],
-            bottomNavigationBar: NavigationBar(
-              selectedIndex: _index,
-              destinations: const [
-                NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-                NavigationDestination(icon: Icon(Icons.event_note), label: 'Notes'),
-                NavigationDestination(
-                  icon: Icon(Icons.person_outline),
-                  label: 'Profile',
-                ),
-              ],
-              onDestinationSelected: (i) => setState(() => _index = i),
-            ),
-          );
-      }
-      );
+        final user = snap.data;
+        if (user == null) return LoginPage();
+        return Scaffold(
+          body: _pages[_index],
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: _index,
+            destinations: const [
+              NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+              NavigationDestination(
+                icon: Icon(Icons.event_note),
+                label: 'Notes',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.calendar_month_outlined),
+                label: 'Attendance',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.person_outline),
+                label: 'Profile',
+              ),
+            ],
+            onDestinationSelected: (i) => setState(() => _index = i),
+          ),
+        );
+      },
+    );
   }
 }

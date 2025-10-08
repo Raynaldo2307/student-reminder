@@ -1,9 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Networking -->
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
+    <!-- Location for Google Maps / Geolocator -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Notifications (Android 13+). Optional until you add FCM -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Camera / Media -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- If targetSdk >= 33, prefer READ_MEDIA_IMAGES over READ_EXTERNAL_STORAGE -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <!-- If you still support older devices and need broad storage access, uncomment:
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    -->
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
@@ -11,6 +24,10 @@
         android:label="students_reminder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCOHMMG5JEkhaxpXVn0AnHat28kutn6ZQ0"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

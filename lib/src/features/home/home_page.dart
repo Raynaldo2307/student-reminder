@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:students_reminder/src/features/admin/admin_screen.dart';
 import 'package:students_reminder/src/services/auth_service.dart';
 import 'package:students_reminder/src/services/user_service.dart';
 import 'package:students_reminder/src/widgets/group_filter.dart';
@@ -16,14 +17,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-   
     final uid = AuthService.instance.currentUser?.uid;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(
+        title: Text('Home'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AdminScreen()),
+              );
+            },
+            icon: Icon(Icons.admin_panel_settings),
+          ),
+        ],
+      ),
       body: Column(
         children: [
-              GroupFilter(value: _group, onChanged: (val) => setState(() => _group = val)),
+          GroupFilter(
+            value: _group,
+            onChanged: (val) => setState(() => _group = val),
+          ),
           Expanded(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: UserService.instance.watchUserByCourseGroup(_group),
@@ -31,19 +47,17 @@ class _HomePageState extends State<HomePage> {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 }
-               
-                if(snap.hasError){
-                  return Center(
-                    child: Text('Error Detected: ${snap.error}'),
-                  );
+
+                if (snap.hasError) {
+                  return Center(child: Text('Error Detected: ${snap.error}'));
                 }
-                 final docs = snap.data?.docs ?? [];
+                final docs = snap.data?.docs ?? [];
                 // if (docs.isEmpty) {
                 //   return Center(
                 //     child: Text('There are no students in this group'),
                 //   );
                 // }
-                
+
                 return ListView.separated(
                   separatorBuilder: (_, _) => Divider(height: 1),
                   itemCount: docs.length,

@@ -1,0 +1,92 @@
+// lib/src/models/attendance_day.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class AttendanceDay {
+  final String date; // "YYYY-MM-DD"
+  final String status; // 'early' | 'late' | 'present' | 'absent'
+  final DateTime? clockInAt;
+  final DateTime? clockOutAt;
+  final double? clockInLat;
+  final double? clockInLng;
+  final double? clockOutLat;
+  final double? clockOutLng;
+  final String? lateReason;
+
+  AttendanceDay({
+    required this.date,
+    required this.status,
+    this.clockInAt,
+    this.clockOutAt,
+    this.clockInLat,
+    this.clockInLng,
+    this.clockOutLat,
+    this.clockOutLng,
+    this.lateReason,
+  });
+
+  // 🔹 copyWith method
+  AttendanceDay copyWith({
+    String? date,
+    String? status,
+    DateTime? clockInAt,
+    DateTime? clockOutAt,
+    double? clockInLat,
+    double? clockInLng,
+    double? clockOutLat,
+    double? clockOutLng,
+    String? lateReason,
+  }) {
+    return AttendanceDay(
+      date: date ?? this.date,
+      status: status ?? this.status,
+      clockInAt: clockInAt ?? this.clockInAt,
+      clockOutAt: clockOutAt ?? this.clockOutAt,
+      clockInLat: clockInLat ?? this.clockInLat,
+      clockInLng: clockInLng ?? this.clockInLng,
+      clockOutLat: clockOutLat ?? this.clockOutLat,
+      clockOutLng: clockOutLng ?? this.clockOutLng,
+      lateReason: lateReason ?? this.lateReason,
+    );
+  }
+
+  /// Convert Firestore Timestamp/DateTime to DateTime?
+  static DateTime? _toDateTime(dynamic v) {
+    if (v == null) return null;
+    if (v is Timestamp) return v.toDate();
+    if (v is DateTime) return v;
+    return null;
+  }
+
+  factory AttendanceDay.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final d = doc.data() ?? <String, dynamic>{};
+    return AttendanceDay(
+      date: ((d['date'] as String?) ?? '').trim(),
+      status: (d['status'] as String?) ?? 'absent',
+      clockInAt: _toDateTime(d['clockInAt']),
+      clockOutAt: _toDateTime(d['clockOutAt']),
+      clockInLat: (d['clockInLoc']?['latitude'] as num?)?.toDouble(),
+      clockInLng: (d['clockInLoc']?['longitude'] as num?)?.toDouble(),
+      clockOutLat: (d['clockOutLoc']?['latitude'] as num?)?.toDouble(),
+      clockOutLng: (d['clockOutLoc']?['longitude'] as num?)?.toDouble(),
+      lateReason: d['lateReason'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic>? loc(double? lat, double? lng) {
+      if (lat == null || lng == null) return null;
+      return {'latitude': lat, 'longitude': lng};
+    }
+
+    return {
+      'date': date,
+      'status': status,
+      'clockInAt': clockInAt,
+      'clockOutAt': clockOutAt,
+      'clockInLoc': loc(clockInLat, clockInLng),
+      'clockOutLoc': loc(clockOutLat, clockOutLng),
+      'lateReason': lateReason,
+      'updatedAt': FieldValue.serverTimestamp(),
+    };
+  }
+}
