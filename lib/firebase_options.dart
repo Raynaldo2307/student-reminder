@@ -47,29 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyACILwEfGm-JPSHSeSfx4NTiaRHrsb6Uj8',
-    appId: '1:35491137537:web:ac10046a652cfe7a421800',
-    messagingSenderId: '35491137537',
-    projectId: 'student-reminder-4892c',
-    authDomain: 'student-reminder-4892c.firebaseapp.com',
-    storageBucket: 'student-reminder-4892c.firebasestorage.app',
-    measurementId: 'G-9L327FH1WE',
+    apiKey: 'AIzaSyAIZRL1b5J13RLzuh9czT35EGZ_JpNClMU',
+    appId: '1:727140327360:web:b25b1d9dda2de181813225',
+    messagingSenderId: '727140327360',
+    projectId: 'studentreminderg2',
+    authDomain: 'studentreminderg2.firebaseapp.com',
+    storageBucket: 'studentreminderg2.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDyME-fEqcJ5qQrAqCbOWIrVtAZ9ri36RI',
-    appId: '1:35491137537:android:9d9321d4a808090b421800',
-    messagingSenderId: '35491137537',
-    projectId: 'student-reminder-4892c',
-    storageBucket: 'student-reminder-4892c.firebasestorage.app',
+    apiKey: 'AIzaSyBNHswmkaolAuTf-KqUqvpIX8vk1vVoj5U',
+    appId: '1:727140327360:android:6468d1b5a40f42a5813225',
+    messagingSenderId: '727140327360',
+    projectId: 'studentreminderg2',
+    storageBucket: 'studentreminderg2.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDcysufYPDhr1PRFUiLQ5Nem_hCsZusJms',
-    appId: '1:35491137537:ios:c50857bbf7fc8ba2421800',
-    messagingSenderId: '35491137537',
-    projectId: 'student-reminder-4892c',
-    storageBucket: 'student-reminder-4892c.firebasestorage.app',
+    apiKey: 'AIzaSyCu51EFazzNjQ_cxptay9DNy-JcWiVwXZA',
+    appId: '1:727140327360:ios:6e707e0cda204db9813225',
+    messagingSenderId: '727140327360',
+    projectId: 'studentreminderg2',
+    storageBucket: 'studentreminderg2.firebasestorage.app',
     iosBundleId: 'com.example.studentsReminder',
   );
 

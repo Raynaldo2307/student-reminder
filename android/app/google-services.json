@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "35491137537",
-    "project_id": "student-reminder-4892c",
-    "storage_bucket": "student-reminder-4892c.firebasestorage.app"
+    "project_number": "727140327360",
+    "project_id": "studentreminderg2",
+    "storage_bucket": "studentreminderg2.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:35491137537:android:9d9321d4a808090b421800",
+        "mobilesdk_app_id": "1:727140327360:android:6468d1b5a40f42a5813225",
         "android_client_info": {
           "package_name": "com.example.students_reminder"
         }
@@ -15,7 +15,45 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDyME-fEqcJ5qQrAqCbOWIrVtAZ9ri36RI"
+          "current_key": "AIzaSyBNHswmkaolAuTf-KqUqvpIX8vk1vVoj5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727140327360:android:4af8f051698d1e43813225",
+        "android_client_info": {
+          "package_name": "com.rayacademy.student_reminder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNHswmkaolAuTf-KqUqvpIX8vk1vVoj5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727140327360:android:d8bbeb896d138c1a813225",
+        "android_client_info": {
+          "package_name": "com.rayacademy.studentsreminder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNHswmkaolAuTf-KqUqvpIX8vk1vVoj5U"
         }
       ],
       "services": {
